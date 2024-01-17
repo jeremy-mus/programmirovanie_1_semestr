@@ -13,11 +13,11 @@ def recursia(a, s):
         return (f"{a} = {s}")
 
 def main():
-    # Получение данных из файла
     with open("laboratornaya_1.txt", "r", encoding = "utf-8") as file:
         temp = file.readline()
         a = list(map(int, temp.split()))
         s = a.pop()
+        # Получение строки начиная с индекса 1-го пробела и заканчивая индексом последнего
         temp = temp[temp.find(' ')+1:temp.rfind(' ')]
         
         result = recursia(temp, s)
