@@ -18,7 +18,7 @@ def main():
         a = list(map(int, temp.split()))
         s = a.pop()
         # Получение строки начиная с индекса 1-го пробела и заканчивая индексом последнего
-        temp = temp[temp.find(' ')+1:temp.rfind(' ')]
+        temp = temp[temp.find(" ")+1:temp.rfind(" ")]
         
         result = recursia(temp, s)
         
@@ -27,7 +27,7 @@ def main():
         else:
             print("no solution")
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
 
 # Работает верно
