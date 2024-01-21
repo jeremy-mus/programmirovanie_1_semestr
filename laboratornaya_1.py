@@ -18,14 +18,18 @@ def main():
         a = list(map(int, temp.split()))
         s = a.pop()
         # Получение строки начиная с индекса 1-го пробела и заканчивая индексом последнего
-        temp = temp[temp.find(" ")+1:temp.rfind(" ")]
+        temp = temp[temp.find(' ')+1:temp.rfind(' ')]
         
         result = recursia(temp, s)
-        
+        # Запись результата в тот же файл, с которого происходило считывание
         if result:
             print(result)
+            with open("laboratornaya_1.txt", "w", encoding="utf-8") as output_file:
+                output_file.write(result)
         else:
             print("no solution")
+            with open("laboratornaya_1.txt", "w", encoding="utf-8") as output_file:
+                output_file.write("no solution")
 
 if __name__ == "__main__":
     main()
