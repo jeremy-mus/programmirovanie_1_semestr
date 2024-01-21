@@ -1,12 +1,12 @@
 from itertools import permutations
 
 def Permutations(n):
-    # Используем множество для избежания дубликатов, затем преобразуем результат в список
-    a = list(set(permutations(n)))
-    return a
+    # Создаем множество уникальных перестановок и преобразуем его в список списков
+    return list(map(list, set(permutations(n))))
 
 if __name__ == "__main__":
-    print("Output:", Permutations(list(input("Input: "))))
+    # Выводим результат, запрашивая ввод пользователя в виде строки и преобразуем в список целых чисел
+    print("Output:", Permutations(list(map(int, input("Input: ")[1:-1].split(",")))))
 
 
 # Работает верно
