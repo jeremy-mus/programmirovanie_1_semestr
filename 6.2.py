@@ -11,7 +11,7 @@ def setVariants(n):
     return len(b) - 1, b[1:]
 
 if __name__ == "__main__":   
-    a, b = setVariants(eval(input("list = ")))
+    a, b = setVariants([int(x) for x in input("list = ")[1:-1].split(",")])
     
     print("Подмножества: ", b)
     print("Количество подмножеств: ", a)
