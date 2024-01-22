@@ -13,7 +13,7 @@ def santa_users(n):
     return a
 
 if __name__ == "__main__":
-    print("Output:", santa_users(list(eval(input("Input: ")))))
+    print("Output:", santa_users([i.split(",") for i in input("Input: ")[2:-2].split("], [")]))
 
 
-# Работает верно
+# Работает верно, не совсем корректный вывод(визуально)
