@@ -9,18 +9,45 @@ def recursia(a, s):
             return result_minus
         return None
     
-    if eval(a) == s:
-        return (f"{a} = {s}")
+    operator = ""
+    num = 0
+    currentNumber = ""
+
+    for i in a:
+        if i in {"+", "-"}:
+            operator = i
+        else:
+            currentNumber += i
+            continue
+
+        # Преобразование текущего числа в целое число и обновление переменной num
+        newNum = int(currentNumber)
+        if operator == "+":
+            num += newNum
+        elif operator == "-":
+            num -= newNum
+        currentNumber = ""
+
+    # Последнее число после последнего знака
+    if currentNumber:
+        newNum = int(currentNumber)
+        if operator == "+":
+            num += newNum
+        elif operator == "-":
+            num -= newNum
+
+    if num == s:
+        return f"{a} = {s}"
 
 def main():
-    with open("laboratornaya_1.txt", "r", encoding = "utf-8") as file:
-        temp = file.readline()
-        a = list(map(int, temp.split()))
+    with open("laboratornaya_1.txt", "r") as file:
+        q = file.readline()
+        a = list(map(int, q.split()))
         s = a.pop()
         # Получение строки начиная с индекса 1-го пробела и заканчивая индексом последнего
-        temp = temp[temp.find(' ')+1:temp.rfind(' ')]
+        q = q[q.find(" ")+1:q.rfind(" ")]
         
-        result = recursia(temp, s)
+        result = recursia(q, s)
         # Запись результата в тот же файл, с которого происходило считывание
         if result:
             print(result)
