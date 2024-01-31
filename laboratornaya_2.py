@@ -41,34 +41,33 @@ def boardPrinter(matrix):
     for row in matrix:
         print(" ".join(row))
 
-def recursia(N, L, solutions, currentSolution, figureCount, startRow=0, startCol=0):
+def recursia(N, L, solutions, currentSolution, figureCount, startRow = 0, startCol = 0):
     # Рекурсивная функция для нахождения расстановок фигур на доске.
-
-    if len(solutions) == 1:
-        # Если уже найдено одно решение, завершаем рекурсию
-        return
 
     if figureCount == L:
         # Проверяем, не добавлено ли уже текущее решение в множество решений
         if tuple(sorted(currentSolution)) not in solutions:
             solutions.add(tuple(sorted(currentSolution)))
-            # Выводим доску с текущим решением в консоль
-            boardPrinter(otherFiguresDislocation(boardInitializer(N), tuple(sorted(currentSolution))))
+        
+            if len(solutions) == 1:
+                # Выводим доску с текущим решением в консоль
+                boardPrinter(otherFiguresDislocation(boardInitializer(N), tuple(sorted(currentSolution))))
         return
 
+       
     for i in range(startRow, N):
         for j in range(startCol if i == startRow else 0, N):
             # Проверяем, что текущая клетка не занята другой фигурой и нет пересечений с возможными ходами
-            if all((moves not in currentSolution) for moves in possibleMoves(i, j)):
+            if (i, j) not in currentSolution and not possibleMoves(i, j).intersection(currentSolution):
                 # Добавляем текущую клетку в решение и рекурсивно вызываем функцию для следующей фигуры
                 currentSolution.append((i, j))
                 next_start_row = i if j == N - 1 else i
                 next_start_col = j + 1 if j < N - 1 else 0
-                recursia(N, L, solutions, currentSolution, figureCount + 1, next_start_row, next_start_col)
-                # Отменяем последний выбор для backtracking
-                currentSolution.pop()
-                return  # Завершаем рекурсию после нахождения первого решения
 
+                recursia(N, L, solutions, currentSolution, figureCount + 1, next_start_row, next_start_col)                
+                currentSolution.pop()
+                
+                
 if __name__ == "__main__":
     # Чтение входных данных из файла
     file = open("input.txt", "r")
